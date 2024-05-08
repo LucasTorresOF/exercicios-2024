@@ -1,4 +1,8 @@
+// ignore_for_file: sort_child_properties_last, avoid_unnecessary_containers
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(const ChuvaDart());
@@ -41,62 +45,116 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Chuva ❤️ Flutter'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Programação',
-            ),
-            const Text(
-              'Nov',
-            ),
-            const Text(
-              '2023',
-            ),
-            OutlinedButton(
-              onPressed: () {
-                _changeDate(DateTime(2023, 11, 26));
-              },
-              child: Text(
-                '26',
-                style: Theme.of(context).textTheme.headlineMedium,
+        appBar: AppBar(
+          toolbarHeight: 100,
+          backgroundColor: Color.fromARGB(255, 129, 129, 194),
+          title: Column(
+            children: [
+              const Text(
+                'Chuva ❤️ Flutter',
+                style: TextStyle(fontSize: 25, color: Colors.white),
               ),
-            ),
-            OutlinedButton(
-              onPressed: () {
-                _changeDate(DateTime(2023, 11, 28));
-              },
-              child: Text(
-                '28',
-                style: Theme.of(context).textTheme.headlineMedium,
+              const Text(
+                'Programação',
+                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
-            ),
-            if (_currentDate.day == 26)
-              OutlinedButton(
-                  onPressed: () {
-                    setState(() {
-                      _clicked = true;
-                    });
-                  },
-                  child: const Text('Mesa redonda de 07:00 até 08:00')),
-            if (_currentDate.day == 28)
-              OutlinedButton(
-                  onPressed: () {
-                    setState(() {
-                      _clicked = true;
-                    });
-                  },
-                  child: const Text('Palestra de 09:30 até 10:00')),
-            if (_currentDate.day == 26 && _clicked) const Activity(),
-          ],
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Color.fromARGB(255, 255, 255, 255)),
+                height: 40,
+                width: 350,
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Color.fromARGB(255, 150, 150, 255)),
+                      height: 30,
+                      width: 50,
+                      child: const Icon(
+                        Icons.calendar_month_outlined,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 45,
+                    ),
+                    const Text(
+                      'Exibindo Todas as atividades',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          centerTitle: true,
         ),
-      ),
-    );
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                child: const Row(children: [
+                  Text(
+                    'Nov',
+                  ),
+                ]),
+              ),
+              Container(
+                  child: const Row(
+                children: [
+                  Text(
+                    '2023',
+                  ),
+                ],
+              )),
+              Container(
+                child: Row(children: [
+                  OutlinedButton(
+                    onPressed: () {
+                      _changeDate(DateTime(2023, 11, 26));
+                    },
+                    child: Text(
+                      '26',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                  ),
+                ]),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  _changeDate(DateTime(2023, 11, 28));
+                },
+                child: Text(
+                  '28',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
+              if (_currentDate.day == 26)
+                OutlinedButton(
+                    onPressed: () {
+                      setState(() {
+                        _clicked = true;
+                      });
+                    },
+                    child: const Text('Mesa redonda de 07:00 até 08:00')),
+              if (_currentDate.day == 28)
+                OutlinedButton(
+                    onPressed: () {
+                      setState(() {
+                        _clicked = true;
+                      });
+                    },
+                    child: const Text('Palestra de 09:30 até 10:00')),
+              if (_currentDate.day == 26 && _clicked) const Activity(),
+            ],
+          ),
+        ));
   }
 }
 
